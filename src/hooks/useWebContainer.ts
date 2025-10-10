@@ -12,5 +12,5 @@ export function useWebContainer() {
         main();
     }, [])
 
-    return webcontainer;
+    return webcontainer as WebContainer;
 }

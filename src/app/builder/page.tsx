@@ -11,26 +11,18 @@ import { Step, FileItem, StepType } from "@/types";
 import axios from "axios";
 import { parseXml } from "@/lib/steps";
 import { useWebContainer } from "@/hooks/useWebContainer";
-import { Loader } from "@/components/Loader";
 import { basePrompt } from "@/defaults/react";
-import { BASE_PROMPT } from "@/utils/prompts";
 
 export default function Builder() {
   const router = useRouter();
   const [prompt, setPromptState] = useState<string>("");
-  const [userPrompt, setPrompt] = useState("");
-  const [llmMessages, setLlmMessages] = useState<
-    { role: "user" | "assistant"; content: string }[]
-  >([]);
   const [loading, setLoading] = useState(false);
   const webcontainer = useWebContainer();
 
   const [currentStep, setCurrentStep] = useState(1);
   const [activeTab, setActiveTab] = useState<"code" | "preview">("code");
   const [selectedFile, setSelectedFile] = useState<FileItem | null>(null);
-
   const [steps, setSteps] = useState<Step[]>([]);
-
   const [files, setFiles] = useState<FileItem[]>([]);
 
   // Get prompt from sessionStorage on mount
