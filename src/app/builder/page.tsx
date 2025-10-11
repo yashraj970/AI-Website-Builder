@@ -11,7 +11,7 @@ import { Step, FileItem, StepType } from "@/types";
 import axios from "axios";
 import { parseXml } from "@/lib/steps";
 import { useWebContainer } from "@/hooks/useWebContainer";
-import { basePrompt } from "@/defaults/react";
+import { baseSteps } from "@/defaults/baseSteps";
 
 export default function Builder() {
   const router = useRouter();
@@ -161,7 +161,7 @@ export default function Builder() {
     if (!prompt) return;
 
     setSteps(
-      parseXml(basePrompt).map((x: Step) => ({
+      baseSteps.map((x: Step) => ({
         ...x,
         status: "pending",
       }))
