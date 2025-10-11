@@ -1,6 +1,6 @@
-import React from 'react';
-import { CheckCircle, Circle, Clock } from 'lucide-react';
-import { Step } from '../types';
+import React from "react";
+import { CheckCircle2, Circle, Loader2 } from "lucide-react";
+import { Step } from "../types";
 
 interface StepsListProps {
   steps: Step[];
@@ -10,30 +10,38 @@ interface StepsListProps {
 
 export function StepsList({ steps, currentStep, onStepClick }: StepsListProps) {
   return (
-    <div className="bg-gray-900 rounded-lg shadow-lg p-4 h-full overflow-auto">
-      <h2 className="text-lg font-semibold mb-4 text-gray-100">Build Steps</h2>
-      <div className="space-y-4">
-        {steps.map((step,i) => (
+    <div className="bg-slate-800 rounded-xl shadow-2xl p-6 h-full overflow-auto border border-slate-700">
+      <h2 className="text-xl font-bold mb-6 text-slate-100 tracking-tight">
+        Progress
+      </h2>
+      <div className="space-y-3">
+        {steps.map((step, i) => (
           <div
             key={i}
-            className={`p-1 rounded-lg cursor-pointer transition-colors ${
+            className={`p-4 rounded-lg cursor-pointer transition-all duration-200 ${
               currentStep === step.id
-                ? 'bg-gray-800 border border-gray-700'
-                : 'hover:bg-gray-800'
+                ? "bg-slate-700 border-l-4 border-cyan-400 shadow-lg"
+                : "hover:bg-slate-750 border-l-4 border-transparent"
             }`}
             onClick={() => onStepClick(step.id)}
           >
-            <div className="flex items-center gap-2">
-              {step.status === 'completed' ? (
-                <CheckCircle className="w-5 h-5 text-green-500" />
-              ) : step.status === 'in-progress' ? (
-                <Clock className="w-5 h-5 text-blue-400" />
+            <div className="flex items-start gap-3">
+              {step.status === "completed" ? (
+                <CheckCircle2 className="w-5 h-5 text-emerald-400 mt-0.5 flex-shrink-0" />
+              ) : step.status === "in-progress" ? (
+                <Loader2 className="w-5 h-5 text-cyan-400 animate-spin mt-0.5 flex-shrink-0" />
               ) : (
-                <Circle className="w-5 h-5 text-gray-600" />
+                <Circle className="w-5 h-5 text-slate-500 mt-0.5 flex-shrink-0" />
               )}
-              <h3 className="font-medium text-gray-100">{step.title}</h3>
+              <div className="flex-1 min-w-0">
+                <h3 className="font-semibold text-slate-100 text-sm leading-tight">
+                  {step.title}
+                </h3>
+                <p className="text-xs text-slate-400 mt-1.5 leading-relaxed">
+                  {step.description}
+                </p>
+              </div>
             </div>
-            <p className="text-sm text-gray-400 mt-2">{step.description}</p>
           </div>
         ))}
       </div>

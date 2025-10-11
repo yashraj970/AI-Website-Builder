@@ -1,6 +1,6 @@
-import React from 'react';
-import Editor from '@monaco-editor/react';
-import { FileItem } from '../types';
+import React from "react";
+import { FileQuestion } from "lucide-react";
+import { FileItem } from "../types";
 
 interface CodeEditorProps {
   file: FileItem | null;
@@ -9,25 +9,25 @@ interface CodeEditorProps {
 export function CodeEditor({ file }: CodeEditorProps) {
   if (!file) {
     return (
-      <div className="h-full flex items-center justify-center text-gray-400">
-        Select a file to view its contents
+      <div className="h-full flex flex-col items-center justify-center text-slate-400 bg-slate-900 rounded-lg border border-slate-700">
+        <FileQuestion className="w-12 h-12 mb-3 text-slate-600" />
+        <p className="text-sm">
+          Select a file from the explorer to view its contents
+        </p>
       </div>
     );
   }
 
   return (
-    <Editor
-      height="100%"
-      defaultLanguage="typescript"
-      theme="vs-dark"
-      value={file.content || ''}
-      options={{
-        readOnly: true,
-        minimap: { enabled: false },
-        fontSize: 14,
-        wordWrap: 'on',
-        scrollBeyondLastLine: false,
-      }}
-    />
+    <div className="h-full bg-slate-900 rounded-lg border border-slate-700 overflow-hidden">
+      <div className="bg-slate-800 px-4 py-3 border-b border-slate-700">
+        <p className="text-sm text-slate-300 font-medium">{file.name}</p>
+      </div>
+      <div className="p-4 overflow-auto h-[calc(100%-52px)]">
+        <pre className="text-sm text-slate-300 font-mono leading-relaxed">
+          <code>{file.content || ""}</code>
+        </pre>
+      </div>
+    </div>
   );
 }

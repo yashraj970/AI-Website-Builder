@@ -12,6 +12,7 @@ import axios from "axios";
 import { parseXml } from "@/lib/steps";
 import { useWebContainer } from "@/hooks/useWebContainer";
 import { baseSteps } from "@/defaults/baseSteps";
+import { Sparkles } from "lucide-react";
 
 export default function Builder() {
   const router = useRouter();
@@ -189,31 +190,38 @@ export default function Builder() {
   }, [prompt]);
 
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col">
-      <header className="bg-gray-800 border-b border-gray-700 px-6 py-4">
-        <h1 className="text-xl font-semibold text-gray-100">Website Builder</h1>
-        <p className="text-sm text-gray-400 mt-1">Prompt: {prompt}</p>
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex flex-col">
+      <header className="bg-slate-900/80 backdrop-blur-sm border-b border-slate-700/50 px-8 py-5 shadow-xl">
+        <div className="flex items-center gap-3">
+          <Sparkles className="w-6 h-6 text-cyan-400" />
+          <div className="flex-1">
+            <h1 className="text-2xl font-bold text-slate-100 tracking-tight">
+              Project Builder
+            </h1>
+            <p className="text-sm text-slate-400 mt-1 font-medium">
+              Building: {prompt}
+            </p>
+          </div>
+        </div>
       </header>
 
       <div className="flex-1 overflow-hidden">
-        <div className="h-full grid grid-cols-4 gap-6 p-6">
-          <div className="col-span-1 space-y-6 overflow-auto">
-            <div>
-              <div className="max-h-[75vh] overflow-scroll">
-                <StepsList
-                  steps={steps}
-                  currentStep={currentStep}
-                  onStepClick={setCurrentStep}
-                />
-              </div>
+        <div className="h-full grid grid-cols-12 gap-5 p-6">
+          <div className="col-span-3 space-y-6 overflow-auto">
+            <div className="max-h-[85vh] overflow-scroll">
+              <StepsList
+                steps={steps}
+                currentStep={currentStep}
+                onStepClick={setCurrentStep}
+              />
             </div>
           </div>
-          <div className="col-span-1">
+          <div className="col-span-3">
             <FileExplorer files={files} onFileSelect={setSelectedFile} />
           </div>
-          <div className="col-span-2 bg-gray-900 rounded-lg shadow-lg p-4 h-[calc(100vh-8rem)]">
+          <div className="col-span-6 bg-slate-800 rounded-xl shadow-2xl p-5 h-[calc(100vh-8rem)] border border-slate-700">
             <TabView activeTab={activeTab} onTabChange={setActiveTab} />
-            <div className="h-[calc(100%-4rem)]">
+            <div className="h-[calc(100%-5rem)]">
               {activeTab === "code" ? (
                 <CodeEditor file={selectedFile} />
               ) : (
