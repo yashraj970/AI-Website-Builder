@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Wand2,
   Sparkles,
   Code2,
   Palette,
@@ -12,6 +11,7 @@ import {
   ArrowRight,
   Rocket,
 } from "lucide-react";
+import { FloatingDots } from "@/components/ui/floating-dots";
 
 export default function Home() {
   const [prompt, setPrompt] = useState("");
@@ -45,6 +45,13 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 relative overflow-hidden">
+      <FloatingDots
+        className="w-full h-full"
+        color={"white"}
+        maxRadius={0.2}
+        maxSpeed={0.8}
+        minSpeed={0.3}
+      />
       <motion.div
         className="absolute inset-0"
         initial={{ opacity: 0 }}
