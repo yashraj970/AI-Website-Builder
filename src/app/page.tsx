@@ -34,7 +34,6 @@ export default function Home() {
     "A modern portfolio website with dark mode",
     "An e-commerce site for handmade crafts",
     "A blog platform with comment system",
-    "A restaurant website with online booking",
   ];
 
   const features = [
