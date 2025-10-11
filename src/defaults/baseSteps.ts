@@ -95,7 +95,7 @@ export const baseSteps: Step[] = [
     description: "",
     type: 0,
     status: "pending",
-    code: "import React from 'react';\n\nfunction App() {\n  return (\n    <div className=\"min-h-screen bg-gray-100 flex items-center justify-center\">\n      <p>Start prompting (or editing) to see magic happen :)</p>\n    </div>\n  );\n}\n\nexport default App;",
+    code: "import React from 'react';\n\nfunction App() {\n  return (\n    <div className=\"min-h-screen bg-gray-100 flex items-center justify-center\">\n      <p>Start prompting and subscribe to Yash Raj Gupta</p>\n    </div>\n  );\n}\n\nexport default App;",
     path: "src/App.tsx",
   },
   {
