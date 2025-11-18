@@ -17,7 +17,7 @@ import { Sparkles } from "lucide-react";
 export default function Builder() {
   const router = useRouter();
   const [prompt, setPromptState] = useState<string>("");
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const webcontainer = useWebContainer();
 
   const [currentStep, setCurrentStep] = useState(1);
@@ -47,17 +47,17 @@ export default function Builder() {
         if (step?.type === StepType.CreateFile) {
           let parsedPath = step.path?.split("/") ?? []; // ["src", "components", "App.tsx"]
           let currentFileStructure = [...originalFiles]; // {}
-          let finalAnswerRef = currentFileStructure;
+          const finalAnswerRef = currentFileStructure;
 
           let currentFolder = "";
           while (parsedPath.length) {
             currentFolder = `${currentFolder}/${parsedPath[0]}`;
-            let currentFolderName = parsedPath[0];
+            const currentFolderName = parsedPath[0];
             parsedPath = parsedPath.slice(1);
 
             if (!parsedPath.length) {
               // final file
-              let file = currentFileStructure.find(
+              const file = currentFileStructure.find(
                 (x) => x.path === currentFolder
               );
               if (!file) {
@@ -72,7 +72,7 @@ export default function Builder() {
               }
             } else {
               /// in a folder
-              let folder = currentFileStructure.find(
+              const folder = currentFileStructure.find(
                 (x) => x.path === currentFolder
               );
               if (!folder) {
@@ -169,12 +169,9 @@ export default function Builder() {
     );
     console.log(steps, "steps");
 
-    setLoading(true);
     const stepsResponse = await axios.post(`/api/chat`, {
       prompt: prompt.trim(),
     });
-
-    setLoading(false);
 
     setSteps((s) => [
       ...s,
