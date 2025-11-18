@@ -15,7 +15,10 @@ export async function POST(request: NextRequest) {
 
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash-lite",
-      contents: `${getSystemPrompt()}${BASE_PROMPT}${`Here is an artifact that contains all files of the project visible to you.\nConsider the contents of ALL files in the project.\n\n${basePrompt}\n\nHere is a list of files that exist on the file system but are not being shown to you:\n\n  - .gitignore\n  - package-lock.json\n`}${prompt}`,
+      contents: `${getSystemPrompt()}
+                 ${BASE_PROMPT}
+                 ${`Here is an artifact that contains all files of the project visible to you.\nConsider the contents of ALL files in the project.\n\n${basePrompt}\n\nHere is a list of files that exist on the file system but are not being shown to you:\n\n  - .gitignore\n  - package-lock.json\n`}
+                 ${prompt}`,
     });
     console.log(response.text);
 
