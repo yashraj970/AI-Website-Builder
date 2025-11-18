@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Loader2, Globe } from "lucide-react";
+import { WebContainer } from "@webcontainer/api";
+import { FileItem } from "@/types";
 
 interface PreviewFrameProps {
-  files: any[];
-  webContainer: any;
+  files: FileItem[];
+  webContainer: WebContainer | null;
 }
 
 export function PreviewFrame({ webContainer }: PreviewFrameProps) {
@@ -18,7 +20,7 @@ export function PreviewFrame({ webContainer }: PreviewFrameProps) {
 
       installProcess.output.pipeTo(
         new WritableStream({
-          write(data) {
+          write(data: string) {
             console.log(data);
           },
         })

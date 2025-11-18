@@ -28,3 +28,7 @@ export interface FileItem {
   content?: string;
   path: string;
 }
+
+export type MountEntry =
+  | { file: { contents: string } }
+  | { directory: Record<string, MountEntry> };

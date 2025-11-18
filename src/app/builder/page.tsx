@@ -7,7 +7,7 @@ import { FileExplorer } from "@/components/FileExplorer";
 import { TabView } from "@/components/TabView";
 import { CodeEditor } from "@/components/CodeEditor";
 import { PreviewFrame } from "@/components/PreviewFrame";
-import { Step, FileItem, StepType } from "@/types";
+import { Step, FileItem, StepType, MountEntry } from "@/types";
 import axios from "axios";
 import { parseXml } from "@/lib/steps";
 import { useWebContainer } from "@/hooks/useWebContainer";
@@ -109,8 +109,8 @@ export default function Builder() {
   }, [steps, files]);
 
   useEffect(() => {
-    const createMountStructure = (files: FileItem[]): Record<string, any> => {
-      const mountStructure: Record<string, any> = {};
+    const createMountStructure = (files: FileItem[]): Record<string, MountEntry> => {
+      const mountStructure: Record<string, MountEntry> = {};
 
       const processFile = (file: FileItem, isRootFolder: boolean) => {
         if (file.type === "folder") {
@@ -177,7 +177,7 @@ export default function Builder() {
       ...s,
       ...parseXml(stepsResponse.data).map((x) => ({
         ...x,
-        status: "pending" as "pending",
+        status: "pending" as const,
       })),
     ]);
   }
